@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@font-face {
+  font-family: 'FixedsysCustomFont';
+  font-family: "DotGothic16", monospace;
+  src: url('./fonts/fixedsys.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
 .App {
   text-align: center;
 }
@@ -22,6 +34,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  /* Center and Fix Image size */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
 .App-link {
@@ -32,4 +49,61 @@
   left: 1000px;
   padding-bottom: 10%;
   
+}
+
+.content-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 1. The button's normal state */
+.menu-Button {
+  z-index: 999;
+  position: relative;
+  background-color:transparent; 
+  font-size: 25px;
+  line-height: 25px;
+  transform: translate(-13rem, 0); /* Moves the button left by -30rem */
+  top: -14rem;
+  border: none;
+  border-radius: 0px;       /* Makes it rounded */
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease; /* Makes transitions smooth */
+  outline: none;             /* Removes the default browser ring */
+  font-family: 'DotGothic16',monospace;
+  text-transform: uppercase;
+  color: #0de435;
+  letter-spacing: 2px;
+}
+
+/* 2. Your custom Hover state (No more mystery grey!) */
+.menu-Button:hover {
+  background-color: #0de435; /* Turns white on hover */
+  color: #000000;            /* Text turns black */
+  transform: translate(-12rem,-0.5rem); /* Lifts the button up slightly */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); /* Adds a shadow */
+
+  animation: blink 1.5s linear infinite;
+}
+
+@keyframes blink{
+  50%{
+    opacity: 0;
+  }
+}
+
+
+.scanline-overlay {
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 33%;   
+  height: 49%;
+  border-radius: 75px;
+  opacity: 1;
+  z-index: 100;
+
 }
