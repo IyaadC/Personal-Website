@@ -1,13 +1,16 @@
 /* global reset/normalize – run before any other rules */
+ 
+
 html {
-  box-sizing: border-box;
   font-family: 'DotGothic16', monospace, sans-serif; /* pick a known, loaded font */
-  font-size: .8rem;              /* makes rems predictable */
-  line-height: 1.7rem;             /* explicit line height for all text */
+  font-size: 0.8rem;              /* makes rems predictable */
+  line-height: 1.2;             /* unitless explicit line height for all text */
+
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -20,15 +23,10 @@ html {
 }
 
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-}
-
 /* 5. Remove built-in form typography styles */
 input, button, textarea, select {
   font: inherit;
-}
+} 
 
 
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
@@ -60,10 +58,8 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 .App-header {
   background-color: #282c34;
   min-height: 100vh; 
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
+
+
   font-size: calc(0.625rem + 2vmin);
   color: white;
   /* Center and Fix Image size */
@@ -87,7 +83,9 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position:relative;
+  position: absolute;         
+  width: 100%;                 
+  height: 100%;
 }
 
 
@@ -95,8 +93,8 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   z-index: 999;
   position: relative;
   background-color:transparent; 
-  transform: translate(-13rem, 0); /* Moves the button left by -30rem */
-  top: -18rem;
+  margin-left: 42rem; /* Moves the button left by -30rem */
+  top: -20rem;
   border: none;
   border-radius: 0px;       /* Makes it rounded */
   cursor: pointer;
@@ -113,7 +111,7 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 .menu-Button:hover {
   background-color: #0de435; /* Turns white on hover */
   color: #000000;            /* Text turns black */
-  transform: translate(-12rem,-0.5rem); /* Lifts the button up slightly */
+  transform: translateY(-0.5rem);
   box-shadow: 0rem 0.625rem 1.25rem rgba(0, 0, 0, 0.3); /* Adds a shadow */
 
   animation: blink 1.5s linear infinite;
@@ -125,11 +123,8 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   }
 }
 
-
-
-
 .scanline-overlay {
-  position: ;
+  position: relative;
   top: 39%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -137,6 +132,6 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   height: 49%;
   border-radius: 4.688rem;
   opacity: 1;
-  z-index: 100;
+  z-index: 999;
 
 }
