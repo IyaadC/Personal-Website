@@ -1,6 +1,7 @@
 import './App.css';
-import Button from '../src/Components/Button';
 import { useEffect, useRef } from 'react';
+import Button from '../src/Components/Button';
+import Terminal from './Components/Terminal';
 
 /* SCREEN contains the elements within the terminal that will be dynamically resized using
  * function positionElements() eg- Menu, TerminalEntry, TerminalLine etc */
@@ -13,6 +14,8 @@ const SCREEN = {
     //Menu coords
     menuX: 0.05,
     menuY: 0.08, 
+    
+    
   };
 
 function App() {
@@ -20,7 +23,7 @@ function App() {
   const bgRef = useRef(null);
   const menuRef = useRef(null);
   const scanlineRef = useRef(null);
-
+  const dividerRef = useRef(null);
   const { left, top, right,bottom, menuX,menuY} = SCREEN;
   /* Runs useEffect after React renders the page.
   */
@@ -29,10 +32,12 @@ function App() {
     */
     function positionElements() {
       // --
+      requestAnimationFrame(() => {
       const img = bgRef.current;
       const menu = menuRef.current;
       const scanline = scanlineRef.current;
-      if (!img || !menu || !scanline) return;
+      const divider = dividerRef.current;
+      if (!img || !menu || !scanline || !divider ) return;
 
       //Actual pixel sizes of the image itself. Eg- 3840x2160 & Never changes
       const naturalW = img.naturalWidth;
@@ -65,12 +70,27 @@ function App() {
       menu.style.left = `${left + width * SCREEN.menuX}px`;   // 5% from screen left for menu
       menu.style.top  = `${top  + height * SCREEN.menuY}px`;  // 8% from screen top for menu
 
-      // Font scales with screen width
+    
+      // Font scales with screen width - apply to ALL text elements except divider
       const buttons = menu.querySelectorAll('.menu-Button');
       buttons.forEach(btn => {
         btn.style.fontSize = `${width * 0.038}px`;
       });
+
+      
+        requestAnimationFrame(() => {
+        const menuRect   = menu.getBoundingClientRect();
+        const imgRect    = img.getBoundingClientRect();
+        const menuBottom = menuRect.bottom - imgRect.top;
+
+        divider.style.left  = `${left + width * 0.05}px`;
+        divider.style.top   = `${menuBottom + height * 0.02}px`;
+        divider.style.width = `${width * 0.90}px`;
+      });
+
+    });
     }
+
 
     const img = bgRef.current;
     //Checks if window is resized. If so then calls positionElements again.
@@ -107,6 +127,11 @@ function App() {
             <Button className="menu-Button" text=">> Experience" onClick={handleClick}/>
             <Button className="menu-Button" text=">> Projects"   onClick={handleClick}/>
             <Button className="menu-Button" text=">> Contact"    onClick={handleClick}/>
+          </div>
+         
+          <div ref={dividerRef} className='p-container' >
+            <hr className = 'screen-divider' />
+            <Terminal />
           </div>
         </div>
       </header>

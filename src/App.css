@@ -67,7 +67,7 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   overflow: hidden;
 
   font-size: calc(0.625rem + 2vmin);
-  color: white;
+  color: rgb(43, 193, 26);
   
 }
 
@@ -163,4 +163,60 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   gap: 0.4em;            
   pointer-events: auto;  
   z-index: 998;    /* Re-enables clicking for buttons */
+}
+
+.p-container{
+  font-family: DotGothic16, monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  z-index: 999;
+}
+
+.screen-divider {
+  border: none;
+  border-top: 3px solid #0de435;
+  width: 100%;
+  margin: 0;
+  opacity: 0.6;
+  box-shadow: 0 0 6px #0de435;
+  transition: all 0.3s ease;
+}
+
+
+.cursor {
+  font-size: 0.8rem;
+  display: inline-block;
+  /* Define the animation properties */
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white; 
+  }
+}
+
+
+
+.terminal-input {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-family: 'DotGothic16', monospace;
+  font-size: smaller;
+  padding-left:  .5ch;
+  padding-top: .5ch;
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  caret-color:red;
+  caret-shape: block;
+  
+  
 }
