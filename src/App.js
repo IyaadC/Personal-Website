@@ -2,45 +2,53 @@ import './App.css';
 import Button from '../src/Components/Button';
 import { useEffect, useRef } from 'react';
 
+/* SCREEN contains the elements within the terminal that will be dynamically resized using
+ * function positionElements() eg- Menu, TerminalEntry, TerminalLine etc */
 const SCREEN = {
+    //Defines screen boundaries (Leave as constants for now)
     left: 0.332,
     top: 0.190,
     right: 0.668,
     bottom: 0.62,
+    //Menu coords
     menuX: 0.05,
     menuY: 0.08, 
   };
 
 function App() {
+
   const bgRef = useRef(null);
   const menuRef = useRef(null);
   const scanlineRef = useRef(null);
 
   const { left, top, right,bottom, menuX,menuY} = SCREEN;
+  /* Runs useEffect after React renders the page.
+  */
   useEffect(() => {
+    /* Function does the relevant math to scale elements so they are where they should be
+    */
     function positionElements() {
+      // --
       const img = bgRef.current;
       const menu = menuRef.current;
       const scanline = scanlineRef.current;
       if (!img || !menu || !scanline) return;
 
+      //Actual pixel sizes of the image itself. Eg- 3840x2160 & Never changes
       const naturalW = img.naturalWidth;
       const naturalH = img.naturalHeight;
+      //How big the image element on the screen - Changes with resizing window.
       const containerW = img.clientWidth;
       const containerH = img.clientHeight;
 
+      //Recreates what "scale". --
       const scale = Math.max(containerW / naturalW, containerH / naturalH);
       const renderedW = naturalW * scale;
       const renderedH = naturalH * scale;
       const offsetX = (containerW - renderedW) / 2;
       const offsetY = (containerH - renderedH) / 2;
 
-      // --- TUNE THESE to match your image ---
-      // CRT screen bounds as % of the original image
-      //const screenLeft   = 0.33203125;  // left edge of screen
-      //const screenTop    = 0.1898148148148148;  // top edge of screen
-      //const screenRight  = 0.66796875;  // right edge of screen
-      //const screenBottom = 0.62;
+    
 
       const left   = offsetX + renderedW * SCREEN.left;
       const top    = offsetY + renderedH * SCREEN.top;
@@ -65,6 +73,7 @@ function App() {
     }
 
     const img = bgRef.current;
+    //Checks if window is resized. If so then calls positionElements again.
     const ro = new ResizeObserver(positionElements);
     ro.observe(img);
 
@@ -80,7 +89,7 @@ function App() {
       window.removeEventListener('resize', positionElements);  // cleanup
       img.removeEventListener('load', positionElements);
     };
-  }, [left, top, right,bottom, menuX,menuY]);
+  }, [left, top, right, bottom, menuX, menuY]); //Reruns whenever these vars change.
 
   function handleClick() {
     console.log("Button clicked!");
