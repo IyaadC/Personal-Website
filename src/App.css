@@ -68,12 +68,7 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 
   font-size: calc(0.625rem + 2vmin);
   color: white;
-  /* Center and Fix Image size */
-  /*background-size: cover;*/
- /*background-size:contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;*/
+  
 }
 
 .App-link {
@@ -85,24 +80,8 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   padding-bottom: 10%;
   
 }
-/*
-.content-box {
-  display: block;
-  top: 0;
-  left: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  position: absolute;         
-  width: 100%;                 
-  height: 100%;
-}
-  */
 
 .content-box {
-  /* 3. The Big Change: Fixed Shape.
-     aspect-ratio ensures the box is ALWAYS the same shape as your image.
-     This makes 'left: 42%' point to the exact same pixel on every screen. */
-   
   height: 100vh;
   width:100vw;
 
@@ -126,11 +105,10 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 
 .menu-Button {
   z-index: 999;
-  /*position: absolute;*/
+  
   position:relative;
   background-color:transparent; 
- /*margin-left: 42rem; /* Moves the button left by -30rem */
-  /*top: -20rem;*/
+ 
   
   border: none;
   border-radius: 0px;       /* Makes it rounded */
@@ -143,11 +121,11 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   color: #0de435;
   letter-spacing: 0.125rem;
 
- /* font-size: clamp(0.6rem, 1.5vw, 0.95rem);*/
+ 
   
 }
 
-/* 2. Your custom Hover state (No more mystery grey!) */
+
 .menu-Button:hover {
   background-color: #0de435; /* Turns white on hover */
   color: #000000;            /* Text turns black */
@@ -165,11 +143,7 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 
 .scanline-overlay {
   position: absolute;
-  /*top: 39%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 33%;   
-  height: 49%;*/
+  
   border-radius: 6.9rem;
   opacity: 1;
   z-index: 997;
@@ -178,12 +152,10 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 
 }
 
-/* 3. The Menu Container - Position this once! */
+
 .menu-container {
   position: absolute;
-  /*top: 50%;    /* Adjust this % to move the whole list up/down the monitor */
-  /*left: 50%;   /* Centered horizontally */
-  /*transform: translate(-23vh,-38vh);*/
+  
   
   display: flex;
   flex-direction: column;
