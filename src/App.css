@@ -58,15 +58,22 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 .App-header {
   background-color: #282c34;
   min-height: 100vh; 
+  width:100vw;
 
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 
   font-size: calc(0.625rem + 2vmin);
   color: white;
   /* Center and Fix Image size */
-  background-size: cover;
+  /*background-size: cover;*/
+ /*background-size:contain;
   background-position: center;
   background-repeat: no-repeat;
-  position: relative;
+  position: relative;*/
 }
 
 .App-link {
@@ -78,23 +85,53 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   padding-bottom: 10%;
   
 }
-
+/*
 .content-box {
-  display: flex;
+  display: block;
+  top: 0;
+  left: 0;
   flex-direction: column;
   align-items: flex-start;
   position: absolute;         
   width: 100%;                 
   height: 100%;
 }
+  */
 
+.content-box {
+  /* 3. The Big Change: Fixed Shape.
+     aspect-ratio ensures the box is ALWAYS the same shape as your image.
+     This makes 'left: 42%' point to the exact same pixel on every screen. */
+   
+  height: 100vh;
+  width:100vw;
+
+  
+  
+  position: relative; /* Acts as the 'anchor' for menu-container */
+  display:flex;
+  overflow:hidden;
+  
+}
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  object-fit: cover;
+  z-index: 0;
+}
 
 .menu-Button {
   z-index: 999;
-  position: relative;
+  /*position: absolute;*/
+  position:relative;
   background-color:transparent; 
-  margin-left: 42rem; /* Moves the button left by -30rem */
-  top: -20rem;
+ /*margin-left: 42rem; /* Moves the button left by -30rem */
+  /*top: -20rem;*/
+  
   border: none;
   border-radius: 0px;       /* Makes it rounded */
   cursor: pointer;
@@ -105,6 +142,9 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   text-transform: uppercase;
   color: #0de435;
   letter-spacing: 0.125rem;
+
+ /* font-size: clamp(0.6rem, 1.5vw, 0.95rem);*/
+  
 }
 
 /* 2. Your custom Hover state (No more mystery grey!) */
@@ -124,14 +164,31 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
 }
 
 .scanline-overlay {
-  position: relative;
-  top: 39%;
+  position: absolute;
+  /*top: 39%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 33%;   
-  height: 49%;
-  border-radius: 4.688rem;
+  height: 49%;*/
+  border-radius: 6.9rem;
   opacity: 1;
-  z-index: 999;
+  z-index: 997;
+  pointer-events: none;
+  overflow: hidden;
 
+}
+
+/* 3. The Menu Container - Position this once! */
+.menu-container {
+  position: absolute;
+  /*top: 50%;    /* Adjust this % to move the whole list up/down the monitor */
+  /*left: 50%;   /* Centered horizontally */
+  /*transform: translate(-23vh,-38vh);*/
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns text to the left of the menu area */
+  gap: 0.4em;            
+  pointer-events: auto;  
+  z-index: 998;    /* Re-enables clicking for buttons */
 }
