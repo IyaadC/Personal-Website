@@ -160,7 +160,7 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Aligns text to the left of the menu area */
-  gap: 0.4em;            
+  gap: 0.45em;            
   pointer-events: auto;  
   z-index: 998;    /* Re-enables clicking for buttons */
 }
@@ -219,4 +219,28 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   caret-shape: block;
   
   
+}
+/* Webkit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0de435;
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0de435;
+  box-shadow: 0 0 6px #0de435;  /* glowing effect on hover */
+}
+
+* {
+  scrollbar-color: #0de435 transparent;  /* thumb color, track color */
+  scrollbar-width: thin;
 }

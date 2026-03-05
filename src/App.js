@@ -40,6 +40,8 @@ function App() {
   const dividerRef = useRef(null);
   const terminalRef = useRef(null);
   const backButtonref = useRef(null);
+  const homeRef = useRef(null);
+
 
   const { left, top, right, bottom, menuX, menuY } = SCREEN;
   /* Runs useEffect after React renders the page.
@@ -56,6 +58,7 @@ function App() {
         const divider = dividerRef.current;
         const terminal = terminalRef.current;
         const back = backButtonref.current;
+        const home = homeRef.current;
         //if (!img || !menu || !scanline || !divider || !terminal) return;
         if (!img || !scanline) return;
 
@@ -86,6 +89,15 @@ function App() {
           scanline.style.top = `${top}px`;
           scanline.style.width = `${width}px`;
           scanline.style.height = `${height}px`;
+
+
+          if (home) {
+            home.style.left = `${left + width * SCREEN.menuX}px`;
+            home.style.top = `${top + height * SCREEN.menuY}px`;
+            home.style.width = `${width * 0.90}px`;
+            home.style.height = `${height * 0.90}px`;
+            home.style.fontSize = `${width * 0.038}px`;
+          }
         }
 
         if (menu) {
@@ -104,19 +116,27 @@ function App() {
           back.style.fontSize = `${width * 0.038}px`;
 
           //Hides backButton on main menu page. Displayed on all others.
-          back.style.display  = location.pathname === '/' ? 'none' : 'block';
+          back.style.display = location.pathname === '/' ? 'none' : 'block';
         }
 
 
         requestAnimationFrame(() => {
 
           if (menu && divider) {
-            const menuRect = menu.getBoundingClientRect();
-            const imgRect = img.getBoundingClientRect();
-            const menuBottom = menuRect.bottom - imgRect.top;
+            // const menuRect = menu.getBoundingClientRect();
+            // const imgRect = img.getBoundingClientRect();
+            // const menuBottom = menuRect.bottom - imgRect.top;
+
+            // Replaced using getBoundingClientRect() with pure math calculating size of menu.
+            const fontSize = width * 0.038;
+            const lineHeight = fontSize * 1.2;   // match your CSS line-height
+            const gap = fontSize * 0.45;   // match your CSS gap in .menu-container
+            const numButtons = menu.querySelectorAll('.menu-Button').length;
+            const menuTop = top + height * SCREEN.menuY;
+            const menuBottom = menuTop + (numButtons * lineHeight) + ((numButtons - 1) * gap);
 
             divider.style.left = `${left + width * 0.05}px`;
-            divider.style.top = `${menuBottom + height * 0.02}px`;
+            divider.style.top = `${menuBottom + height * 0.03}px`;
             divider.style.width = `${width * 0.90}px`;
 
             if (terminal) {
@@ -142,16 +162,16 @@ function App() {
     const ro = new ResizeObserver(positionElements);
     ro.observe(img);
 
+
     window.addEventListener('resize', positionElements);
-    if (img.complete) {
-      positionElements();
-    } else {
-      img.addEventListener('load', positionElements);
-    }
+
     //Ensures re-render is caught when navigating
     if (img.complete) {
       positionElements();
-      setTimeout(positionElements, 100);  // catches post-navigation render
+      setTimeout(positionElements, 50);  // catches post-navigation render
+      setTimeout(positionElements, 250);
+      setTimeout(positionElements, 500);
+
     } else {
       img.addEventListener('load', positionElements);
     }
@@ -198,14 +218,18 @@ function App() {
                 </div>
               </>
             } />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={
+              <div ref={homeRef} style={{ position: 'absolute', zIndex: 999, overflowY: 'auto', overflowX: 'hidden' }}>
+                <Home />
+              </div>
+            } />
             <Route path="/education" element={<Education />} />
             <Route path="/experience" element={<Experience />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
-          <div ref={backButtonref} style={{position:'absolute', zIndex:999}}>
-            <BackButton/>
+          <div ref={backButtonref} style={{ position: 'absolute', zIndex: 999 }}>
+            <BackButton />
           </div>
         </div>
       </header>
