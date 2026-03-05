@@ -4,6 +4,8 @@ export default function Terminal({text, userInput: controlled, onChange}) {
   const [userInput, setUserInput] = useState('');
   const inputRef = useRef(null);
 
+  //const [response,setResponse] = useState('');
+
   const [hasLinePrinted, setHasLinePrinted] = useState(false);
   // forward updates to parent if a handler is provided
   function handleChange(e) {
@@ -31,26 +33,31 @@ export default function Terminal({text, userInput: controlled, onChange}) {
       switch(cmd) {
         case 'home':
           setUserInput('>> Navigating to Home...');
+          setHasLinePrinted(true);
           // later: navigate('/home') goes here
           break;
 
         case 'education':
           setUserInput('>> Navigating to Education...');
+          setHasLinePrinted(true);
           // later: navigate('/education') goes here
           break;
 
         case 'experience':
           setUserInput('>> Navigating to Experience...');
+          setHasLinePrinted(true);
           // later: navigate('/experience') goes here
           break;
 
         case 'projects':
           setUserInput('>> Navigating to Projects...');
+          setHasLinePrinted(true);
           // later: navigate('/projects') goes here
           break;
 
         case 'contact':
           setUserInput('>> Navigating to Contact...');
+          setHasLinePrinted(true);
           // later: navigate('/contact') goes here
           break;
 
@@ -82,16 +89,16 @@ export default function Terminal({text, userInput: controlled, onChange}) {
   return (
 
       <div className="terminal-input"> 
-      <p>&gt;&gt; Type your command... ~ %   </p>
-      <p className="cursor">█</p>
+      <span style={{whiteSpace: 'nowrap'}}>&gt;&gt; Type your command... ~ %  </span> {/* 'nowrap' keeps the prompt on one line */} 
 
       <input
         ref={inputRef}
-        className="terminal-input"
+        //className="terminal-input"
         value={userInput}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         autoComplete="off"
+        style={{backgroundColor:'transparent', border: 'none', color: 'white', outline: 'none', marginLeft: '0.5ch'}}
       />
 
     </div>
