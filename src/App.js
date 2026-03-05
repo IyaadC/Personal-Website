@@ -40,8 +40,14 @@ function App() {
   const dividerRef = useRef(null);
   const terminalRef = useRef(null);
   const backButtonref = useRef(null);
-  const homeRef = useRef(null);
-
+  //const homeRef = useRef(null);
+  const pageRefs = {
+    home: useRef(null),
+    contact: useRef(null),
+    education: useRef(null),
+    experience: useRef(null),
+    projects: useRef(null),
+  };
 
   const { left, top, right, bottom, menuX, menuY } = SCREEN;
   /* Runs useEffect after React renders the page.
@@ -58,7 +64,7 @@ function App() {
         const divider = dividerRef.current;
         const terminal = terminalRef.current;
         const back = backButtonref.current;
-        const home = homeRef.current;
+        //const home = homeRef.current;
         //if (!img || !menu || !scanline || !divider || !terminal) return;
         if (!img || !scanline) return;
 
@@ -91,13 +97,18 @@ function App() {
           scanline.style.height = `${height}px`;
 
 
-          if (home) {
-            home.style.left = `${left + width * SCREEN.menuX}px`;
-            home.style.top = `${top + height * SCREEN.menuY}px`;
-            home.style.width = `${width * 0.90}px`;
-            home.style.height = `${height * 0.90}px`;
-            home.style.fontSize = `${width * 0.038}px`;
-          }
+
+          const pageStyle = {
+            left: `${left + width * SCREEN.menuX}px`,
+            top: `${top + height * SCREEN.menuY}px`,
+            width: `${width * 0.90}px`,
+            height: `${height * 0.90}px`,
+            fontSize: `${width * 0.038}px`,
+          };
+
+          Object.values(pageRefs).forEach(ref => {
+            if (ref.current) Object.assign(ref.current.style, pageStyle);
+          });
         }
 
         if (menu) {
@@ -219,14 +230,30 @@ function App() {
               </>
             } />
             <Route path="/home" element={
-              <div ref={homeRef} style={{ position: 'absolute', zIndex: 999, overflowY: 'auto', overflowX: 'hidden' }}>
+              <div ref={pageRefs.home} style={{ position: 'absolute', zIndex: 999, overflowY: 'auto', overflowX: 'hidden' }}>
                 <Home />
               </div>
             } />
-            <Route path="/education" element={<Education />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={
+              <div ref={pageRefs.contact} style={{ position: 'absolute', zIndex: 999, overflow: 'hidden' }}>
+                <Contact />
+              </div>
+            } />
+            <Route path="/education" element={
+              <div ref={pageRefs.education} style={{ position: 'absolute', zIndex: 999, overflow: 'hidden' }}>
+                <Education />
+              </div>
+            } />
+            <Route path="/experience" element={
+              <div ref={pageRefs.experience} style={{ position: 'absolute', zIndex: 999, overflow: 'hidden' }}>
+                <Experience />
+              </div>
+            } />
+            <Route path="/projects" element={
+              <div ref={pageRefs.projects} style={{ position: 'absolute', zIndex: 999, overflow: 'hidden' }}>
+                <Projects />
+              </div>
+            } />
           </Routes>
           <div ref={backButtonref} style={{ position: 'absolute', zIndex: 999 }}>
             <BackButton />

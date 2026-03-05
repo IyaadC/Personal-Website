@@ -26,13 +26,12 @@ export default function Home() {
                 overflowY: 'auto',   // scrolls when content overflows
                 paddingTop: '0.5em',
             }}>
-                <h1 style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>Welcome to my React App!</h1>
-                <p style={{ fontSize: '1em' }}>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-
+                <h1 style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>Hi, I'm Iyaad Cassim</h1>
+                <h2 style={{ fontSize: '1.25em', marginBottom: '0.5em' }}>Software Engineer</h2>
+                <p style={{ fontSize: '1em' }}>
+                I like to challenge myself using new technologies, build sleek software solutions and enjoy showcasing my personality through my code.
                 </p>
-                <p>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
-                </p>
+                
             </div>
         </div >
     );
