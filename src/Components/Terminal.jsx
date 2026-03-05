@@ -3,10 +3,9 @@ import React, {useEffect, useRef, useState} from 'react';
 export default function Terminal({text, userInput: controlled, onChange}) {
   const [userInput, setUserInput] = useState('');
   const inputRef = useRef(null);
-
-  //const [response,setResponse] = useState('');
-
+  const [response,setResponse] = useState('');
   const [hasLinePrinted, setHasLinePrinted] = useState(false);
+
   // forward updates to parent if a handler is provided
   function handleChange(e) {
     if(hasLinePrinted){
@@ -25,6 +24,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
 
       if(hasLinePrinted){
         setUserInput('');
+        setResponse('');
         setHasLinePrinted(false);
         return;
       }
@@ -32,37 +32,43 @@ export default function Terminal({text, userInput: controlled, onChange}) {
 
       switch(cmd) {
         case 'home':
-          setUserInput('>> Navigating to Home...');
+          setResponse('>> Navigating to Home...');
+          setUserInput('');
           setHasLinePrinted(true);
           // later: navigate('/home') goes here
           break;
 
         case 'education':
-          setUserInput('>> Navigating to Education...');
+          setResponse('>> Navigating to Education...');
+          setUserInput('');
           setHasLinePrinted(true);
           // later: navigate('/education') goes here
           break;
 
         case 'experience':
-          setUserInput('>> Navigating to Experience...');
+          setResponse('>> Navigating to Experience...');
+          setUserInput('');
           setHasLinePrinted(true);
           // later: navigate('/experience') goes here
           break;
 
         case 'projects':
-          setUserInput('>> Navigating to Projects...');
+          setResponse('>> Navigating to Projects...');
+          setUserInput('');
           setHasLinePrinted(true);
           // later: navigate('/projects') goes here
           break;
 
         case 'contact':
-          setUserInput('>> Navigating to Contact...');
+          setResponse('>> Navigating to Contact...');
+          setUserInput('');
           setHasLinePrinted(true);
           // later: navigate('/contact') goes here
           break;
 
         case 'help':
-          setUserInput('>> Commands: home, education, experience, projects, contact, clear');
+          setResponse('>> Commands: home, education, experience, projects, contact, clear');
+          setUserInput('');
           setHasLinePrinted(true);
           break;
 
@@ -75,7 +81,8 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           break;
 
         default:
-          setUserInput(`>> Error: "${cmd}" not recognised. Type "help" for commands.`);
+          setResponse(`>> Error: "${cmd}" not recognised. Type "help" for commands.`);
+          setUserInput('');
           setHasLinePrinted(true);
           break;
       }
@@ -85,21 +92,60 @@ export default function Terminal({text, userInput: controlled, onChange}) {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-
+  
   return (
 
-      <div className="terminal-input"> 
-      <span style={{whiteSpace: 'nowrap'}}>&gt;&gt; Type your command... ~ %  </span> {/* 'nowrap' keeps the prompt on one line */} 
+      <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      width: '100%',
+      fontFamily: 'DotGothic16',
+      fontSize: 'DotGothic16',
+      color: '#0de435',
+    }}>
 
-      <input
-        ref={inputRef}
-        //className="terminal-input"
-        value={userInput}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        autoComplete="off"
-        style={{backgroundColor:'transparent', border: 'none', color: 'white', outline: 'none', marginLeft: '0.5ch'}}
-      />
+      {/* Response — plain text, wraps naturally */}
+      {response && (
+        <span style={{
+          whiteSpace: 'pre-wrap',
+          wordBreak: 'break-word',
+          overflowWrap: 'break-word',
+          width: '100%',
+          marginBottom: '0.3em',
+          color: '#0de435',
+          textAlign: 'left',
+          display:'block',
+        }}>
+          {response}
+        </span>
+      )}
+
+      {/* Input row */}
+      <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+        <span style={{ whiteSpace: 'nowrap', color:'white' }}>
+          &gt;&gt; Type your command... ~ %&nbsp;
+        </span>
+        <input
+          ref={inputRef}
+          value={userInput}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          autoComplete="off"
+          spellCheck={false}
+          style={{
+            backgroundColor: 'transparent',
+            border: 'none',
+            color: 'white',
+            outline: 'none',
+            flex: 1,
+            minWidth: 0,
+            fontFamily: 'DotGothic16',
+            caretShape: 'block',
+            caretColor: 'white',
+          }}
+        />
+      </div>
 
     </div>
       

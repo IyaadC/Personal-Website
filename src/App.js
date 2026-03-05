@@ -24,6 +24,7 @@ function App() {
   const menuRef = useRef(null);
   const scanlineRef = useRef(null);
   const dividerRef = useRef(null);
+  const terminalRef = useRef(null);
   const { left, top, right,bottom, menuX,menuY} = SCREEN;
   /* Runs useEffect after React renders the page.
   */
@@ -37,7 +38,8 @@ function App() {
       const menu = menuRef.current;
       const scanline = scanlineRef.current;
       const divider = dividerRef.current;
-      if (!img || !menu || !scanline || !divider ) return;
+      const terminal = terminalRef.current;
+      if (!img || !menu || !scanline || !divider || !terminal) return;
 
       //Actual pixel sizes of the image itself. Eg- 3840x2160 & Never changes
       const naturalW = img.naturalWidth;
@@ -86,6 +88,13 @@ function App() {
         divider.style.left  = `${left + width * 0.05}px`;
         divider.style.top   = `${menuBottom + height * 0.02}px`;
         divider.style.width = `${width * 0.90}px`;
+
+        const dividerBottom = menuBottom + height * 0.02 + 2;
+        terminal.style.left     = `${left + width * 0.05}px`;
+        terminal.style.top      = `${dividerBottom + height * 0.02}px`;
+        terminal.style.width    = `${width * 0.90}px`;
+        terminal.style.fontSize = `${width * 0.04}px`;
+
       });
 
     });
@@ -131,6 +140,8 @@ function App() {
          
           <div ref={dividerRef} className='p-container' >
             <hr className = 'screen-divider' />
+            </div>
+          <div ref={terminalRef} style={{position:'absolute',zIndex:998}}>
             <Terminal />
           </div>
         </div>
