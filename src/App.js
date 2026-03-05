@@ -10,6 +10,7 @@ import Education from './pages/Education';
 import Experience from './pages/Experience';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import BackButton from './Components/BackButton';
 
 
 /* SCREEN contains the elements within the terminal that will be dynamically resized using
@@ -38,6 +39,8 @@ function App() {
   const scanlineRef = useRef(null);
   const dividerRef = useRef(null);
   const terminalRef = useRef(null);
+  const backButtonref = useRef(null);
+
   const { left, top, right, bottom, menuX, menuY } = SCREEN;
   /* Runs useEffect after React renders the page.
   */
@@ -52,6 +55,7 @@ function App() {
         const scanline = scanlineRef.current;
         const divider = dividerRef.current;
         const terminal = terminalRef.current;
+        const back = backButtonref.current;
         //if (!img || !menu || !scanline || !divider || !terminal) return;
         if (!img || !scanline) return;
 
@@ -94,9 +98,18 @@ function App() {
             btn.style.fontSize = `${width * 0.038}px`;
           });
         }
+        if (back) {
+          back.style.left = `${left + width * SCREEN.menuX}px`;
+          back.style.top = `${top + height * SCREEN.menuY}px`;
+          back.style.fontSize = `${width * 0.038}px`;
+
+          //Hides backButton on main menu page. Displayed on all others.
+          back.style.display  = location.pathname === '/' ? 'none' : 'block';
+        }
 
 
         requestAnimationFrame(() => {
+
           if (menu && divider) {
             const menuRect = menu.getBoundingClientRect();
             const imgRect = img.getBoundingClientRect();
@@ -132,6 +145,13 @@ function App() {
     window.addEventListener('resize', positionElements);
     if (img.complete) {
       positionElements();
+    } else {
+      img.addEventListener('load', positionElements);
+    }
+    //Ensures re-render is caught when navigating
+    if (img.complete) {
+      positionElements();
+      setTimeout(positionElements, 100);  // catches post-navigation render
     } else {
       img.addEventListener('load', positionElements);
     }
@@ -184,6 +204,9 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+          <div ref={backButtonref} style={{position:'absolute', zIndex:999}}>
+            <BackButton/>
+          </div>
         </div>
       </header>
     </div>

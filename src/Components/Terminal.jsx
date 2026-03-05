@@ -1,10 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Terminal({text, userInput: controlled, onChange}) {
   const [userInput, setUserInput] = useState('');
   const inputRef = useRef(null);
   const [response,setResponse] = useState('');
   const [hasLinePrinted, setHasLinePrinted] = useState(false);
+
+  //Used for routing via Terminal
+  const navigate = useNavigate();
 
   // forward updates to parent if a handler is provided
   function handleChange(e) {
@@ -35,6 +39,8 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setResponse('>> Navigating to Home...');
           setUserInput('');
           setHasLinePrinted(true);
+          setTimeout(() => navigate('/home'), 800);
+
           // later: navigate('/home') goes here
           break;
 
@@ -42,6 +48,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setResponse('>> Navigating to Education...');
           setUserInput('');
           setHasLinePrinted(true);
+          setTimeout(() => navigate('/education'), 800);
           // later: navigate('/education') goes here
           break;
 
@@ -49,6 +56,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setResponse('>> Navigating to Experience...');
           setUserInput('');
           setHasLinePrinted(true);
+          setTimeout(() => navigate('/experience'), 800);
           // later: navigate('/experience') goes here
           break;
 
@@ -56,6 +64,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setResponse('>> Navigating to Projects...');
           setUserInput('');
           setHasLinePrinted(true);
+          setTimeout(() => navigate('/projects'), 800);
           // later: navigate('/projects') goes here
           break;
 
@@ -63,6 +72,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setResponse('>> Navigating to Contact...');
           setUserInput('');
           setHasLinePrinted(true);
+          setTimeout(() => navigate('/contact'), 800);
           // later: navigate('/contact') goes here
           break;
 
