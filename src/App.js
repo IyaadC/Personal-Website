@@ -11,7 +11,7 @@ import Experience from './pages/Experience';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import BackButton from './Components/BackButton';
-
+import NextButton from './Components/NextButton';
 
 /* SCREEN contains the elements within the terminal that will be dynamically resized using
  * function positionElements() eg- Menu, TerminalEntry, TerminalLine etc */
@@ -40,6 +40,8 @@ function App() {
   const dividerRef = useRef(null);
   const terminalRef = useRef(null);
   const backButtonref = useRef(null);
+  const nextButtonRef = useRef(null);
+
   //const homeRef = useRef(null);
   const pageRefs = {
     home: useRef(null),
@@ -64,6 +66,7 @@ function App() {
         const divider = dividerRef.current;
         const terminal = terminalRef.current;
         const back = backButtonref.current;
+        const next = nextButtonRef.current;
         //const home = homeRef.current;
         //if (!img || !menu || !scanline || !divider || !terminal) return;
         if (!img || !scanline) return;
@@ -129,6 +132,12 @@ function App() {
           //Hides backButton on main menu page. Displayed on all others.
           back.style.display = location.pathname === '/' ? 'none' : 'block';
         }
+        if (next) {
+            next.style.left = `${left + width * (1 - SCREEN.menuX) - next.offsetWidth}px`; // right aligned
+            next.style.top = `${top + height * SCREEN.menuY}px`;
+            next.style.fontSize = `${width * 0.038}px`;
+            next.style.display = location.pathname === '/' ? 'none' : 'block';
+          }
 
 
         requestAnimationFrame(() => {
@@ -257,6 +266,9 @@ function App() {
           </Routes>
           <div ref={backButtonref} style={{ position: 'absolute', zIndex: 999 }}>
             <BackButton />
+          </div>
+          <div ref={nextButtonRef} style={{ position: 'absolute', zIndex: 999 }}>
+            <NextButton />
           </div>
         </div>
       </header>

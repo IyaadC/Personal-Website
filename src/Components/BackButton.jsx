@@ -20,7 +20,7 @@ export default function BackButton() {
                 whiteSpace: 'nowrap',
             }}
         >
-            &gt;&gt; BACK
+            &lt;&lt; BACK
         </button>
     );
 }
