@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 //Routing for next page
 const NEXT_PAGE = {
@@ -20,7 +20,8 @@ const NEXT_LABEL = {
 //Component that navigates to the next page in the sequence defined above
 export default function NextButton() {
   const navigate = useNavigate();
-  const current = window.location.pathname;
+  const location = useLocation();
+  const current = location.pathname;
   const next = NEXT_PAGE[current];
 
   if (!next) return null;  // don't render if no next page defined

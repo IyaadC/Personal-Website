@@ -81,7 +81,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           break;
 
         case 'help':
-          setResponse('>> Commands: home, education, experience, projects, contact, clear');
+          setResponse('>> Commands: home, education, experience, projects, contact');
           setUserInput('');
           setHasLinePrinted(true);
           break;
