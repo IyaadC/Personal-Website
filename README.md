@@ -34,4 +34,8 @@ Launches the test runner in interactive watch mode.
 ### `npm run eject`
 **Note: this is a one way operation and cannot be undone.** Exposes all configuration files for full control over the build setup.
 
+### `npm run dev`
+Starts the dev server
 
+### `npm run deploy`
+Deploys the final build to Github Pages.
