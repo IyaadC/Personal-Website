@@ -1,7 +1,10 @@
 import { useNavigate, useLocation } from "react-router-dom";
 
+/* Component that returns to the previous page */
 export default function BackButton() {
+    //Changes to next page using navigate
     const navigate = useNavigate();
+    //Tracks the current URL
     const location = useLocation();
 
     //Safety check to avoid crashing if someone goes directly by URL instead of normally.
@@ -19,7 +22,8 @@ export default function BackButton() {
                 alignItems: 'center',
                 whiteSpace: 'nowrap',
             }}
-        >
+        >   
+            {/*Button label. */}
             &lt;&lt; BACK
         </button>
     );

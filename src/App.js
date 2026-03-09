@@ -42,7 +42,7 @@ function App() {
   const backButtonref = useRef(null);
   const nextButtonRef = useRef(null);
 
-  //const homeRef = useRef(null);
+ // Refs for page containers (home, education, experience, projects, contact)
   const pageRefs = {
     home: useRef(null),
     contact: useRef(null),
@@ -58,8 +58,10 @@ function App() {
     /* Function does the relevant math to scale elements so they are where they should be
     */
     function positionElements() {
-      // --
+      
+      
       requestAnimationFrame(() => {
+        // Gets the actual DOM elements using refs
         const img = bgRef.current;
         const menu = menuRef.current;
         const scanline = scanlineRef.current;
@@ -67,8 +69,8 @@ function App() {
         const terminal = terminalRef.current;
         const back = backButtonref.current;
         const next = nextButtonRef.current;
-        //const home = homeRef.current;
-        //if (!img || !menu || !scanline || !divider || !terminal) return;
+        
+        // Safety check to ensure elements exist before trying to access properties
         if (!img || !scanline) return;
 
         //Actual pixel sizes of the image itself. Eg- 3840x2160 & Never changes
@@ -100,7 +102,7 @@ function App() {
           scanline.style.height = `${height}px`;
 
 
-
+          // Calculate the style for page containers based on the screen dimensions and position
           const pageStyle = {
             left: `${left + width * SCREEN.menuX}px`,
             top: `${top + height * SCREEN.menuY}px`,
@@ -108,7 +110,7 @@ function App() {
             height: `${height * 0.90}px`,
             fontSize: `${width * 0.038}px`,
           };
-
+          // Applies the calculated style to all page containers (home, education, experience, projects, contact)
           Object.values(pageRefs).forEach(ref => {
             if (ref.current) Object.assign(ref.current.style, pageStyle);
           });
@@ -143,14 +145,10 @@ function App() {
         requestAnimationFrame(() => {
 
           if (menu && divider) {
-            // const menuRect = menu.getBoundingClientRect();
-            // const imgRect = img.getBoundingClientRect();
-            // const menuBottom = menuRect.bottom - imgRect.top;
 
-            // Replaced using getBoundingClientRect() with pure math calculating size of menu.
             const fontSize = width * 0.038;
-            const lineHeight = fontSize * 1.2;   // match your CSS line-height
-            const gap = fontSize * 0.45;   // match your CSS gap in .menu-container
+            const lineHeight = fontSize * 1.2;   // matches CSS line-height
+            const gap = fontSize * 0.45;   // matches CSS gap in .menu-container
             const numButtons = menu.querySelectorAll('.menu-Button').length;
             const menuTop = top + height * SCREEN.menuY;
             const menuBottom = menuTop + (numButtons * lineHeight) + ((numButtons - 1) * gap);

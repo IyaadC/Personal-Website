@@ -121,6 +121,9 @@ html { font-family: 'DotGothic16', 'FixedsysCustomFont', monospace; }
   color: #0de435;
   letter-spacing: 0.125rem;
 
+  display: inline-flex;       
+  align-self: flex-start;     /* stops button stretching full width */
+  width: auto;   
  
   
 }

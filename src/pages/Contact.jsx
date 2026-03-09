@@ -17,7 +17,11 @@ export default function Contact() {
       <div style={{ height: '1.2em', flexShrink: 0 }} />
 
       {/* Divider */}
-      <hr className="screen-divider" style={{ width: '100%', margin: '0.3em 0', flexShrink: 0 }} />
+      <hr className="screen-divider" style={{
+        width: '100%',
+        margin: '0.3em 0',
+        flexShrink: 0
+      }} />
 
       {/* Content styling*/}
       <div style={{
@@ -28,12 +32,21 @@ export default function Contact() {
         flexDirection: 'column',
         gap: '1em',
       }}>
-        <h1 style={{ fontFamily: 'DotGothic16, monospace', marginBottom: '0.5em', fontSize:'1em' }}>
+        <h1 style={{
+          fontFamily: 'DotGothic16, monospace',
+          marginBottom: '0.5em',
+          fontSize: '1em'
+        }}>
           &gt;&gt; Here are my points of contact. I'm always looking for a new project to work on. Let's get in touch! •ᴗ•
         </h1>
 
-        {/* GitHub */}
-        <a href="https://github.com/IyaadC" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        {/*GitHub Button*/}
+        <a href="https://github.com/IyaadC"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: 'none'
+          }}>
           <button className="menu-Button" style={{
             display: 'flex',
             alignItems: 'center',
@@ -41,13 +54,18 @@ export default function Contact() {
             fontFamily: 'DotGothic16, monospace',
             whiteSpace: 'nowrap',
           }}>
-            
+
             &gt;&gt;<FaGithub /> GITHUB
           </button>
         </a>
 
-        {/* LinkedIn */}
-        <a href="https://www.linkedin.com/in/iyaad-cassim-792021259/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        {/*LinkedIn Button*/}
+        <a href="https://www.linkedin.com/in/iyaad-cassim-792021259/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: 'none'
+          }}>
           <button className="menu-Button" style={{
             display: 'flex',
             alignItems: 'center',
@@ -59,8 +77,13 @@ export default function Contact() {
           </button>
         </a>
 
-        {/* Email */}
-        <a href="mailto:iyaadcassim2001@gmail.com" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        {/*Email  Button*/}
+        <a href="mailto:iyaadcassim2001@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: 'none'
+          }}>
           <button className="menu-Button" style={{
             display: 'flex',
             alignItems: 'center',

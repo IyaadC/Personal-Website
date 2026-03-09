@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
+//Terminal component that accepts user input and responds to commands like "home", "education", etc. to navigate to different pages. Also has a "help" command to list available commands, and a "clear" command to clear the input. Unrecognized commands show an error message.
 export default function Terminal({text, userInput: controlled, onChange}) {
   const [userInput, setUserInput] = useState('');
   const inputRef = useRef(null);
@@ -12,11 +13,13 @@ export default function Terminal({text, userInput: controlled, onChange}) {
 
   // forward updates to parent if a handler is provided
   function handleChange(e) {
+    // if a line has just been printed, replace the input with the new character instead of appending to it
     if(hasLinePrinted){
       const newChar = e.target.value.slice(-1);
       setUserInput(newChar);
       setHasLinePrinted(false);
     }
+    // otherwise, update as normal
     else{
       setUserInput(e.target.value);
     }
@@ -25,7 +28,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
 
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
-
+      // if a line has just been printed, pressing Enter should clear the input and response for the next command
       if(hasLinePrinted){
         setUserInput('');
         setResponse('');
@@ -35,13 +38,14 @@ export default function Terminal({text, userInput: controlled, onChange}) {
       const cmd = userInput.trim().toLowerCase();
 
       switch(cmd) {
+        // for each case, set the response to show the navigation message, clear the input, set hasLinePrinted to true to indicate a line has been printed, and then navigate to the appropriate page after a short delay (to allow the user to see the message)
         case 'home':
           setResponse('>> Navigating to Home...');
           setUserInput('');
           setHasLinePrinted(true);
           setTimeout(() => navigate('/home'), 800);
 
-          // later: navigate('/home') goes here
+          
           break;
 
         case 'education':
@@ -49,7 +53,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setUserInput('');
           setHasLinePrinted(true);
           setTimeout(() => navigate('/education'), 800);
-          // later: navigate('/education') goes here
+          
           break;
 
         case 'experience':
@@ -57,7 +61,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setUserInput('');
           setHasLinePrinted(true);
           setTimeout(() => navigate('/experience'), 800);
-          // later: navigate('/experience') goes here
+          
           break;
 
         case 'projects':
@@ -65,7 +69,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setUserInput('');
           setHasLinePrinted(true);
           setTimeout(() => navigate('/projects'), 800);
-          // later: navigate('/projects') goes here
+          
           break;
 
         case 'contact':
@@ -73,7 +77,7 @@ export default function Terminal({text, userInput: controlled, onChange}) {
           setUserInput('');
           setHasLinePrinted(true);
           setTimeout(() => navigate('/contact'), 800);
-          // later: navigate('/contact') goes here
+          
           break;
 
         case 'help':
