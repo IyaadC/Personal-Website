@@ -57,7 +57,7 @@ export default function Experience() {
                 
 
               </div>
-              <img src="/company1-logo.png" alt="Company Logo" style={{
+              <img src={process.env.PUBLIC_URL + "/company1-logo.png"} alt="Company Logo" style={{
                 width: '40%', padding: '0.5em', border: '2px solid #0de435',
                 boxShadow: '0 0 8px #0de435', flexShrink: 0,
               }} />

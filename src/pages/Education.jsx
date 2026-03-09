@@ -112,7 +112,7 @@ export default function Education() {
                 <p><strong>Graduation Date:</strong></p>
                 <p style={{ whiteSpace: 'nowrap' }}>Dec 2025</p>
               </div>
-              <img src="/unimelb-logo.png" alt="University Logo" style={{
+              <img src={process.env.PUBLIC_URL + "/unimelb-logo.png"} alt="University Logo" style={{
                 width: '25%', padding: '0.5em', border: '2px solid #0de435',
                 boxShadow: '0 0 8px #0de435', flexShrink: 0,
               }} />
