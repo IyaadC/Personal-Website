@@ -212,7 +212,7 @@ function App() {
       <header className="App-header">
         <div className="content-box">
           {/*The background and scanlines stay regardless of the route */}
-          <img ref={bgRef} className="bg-image" src="/background.png" alt="background" />
+          <img ref={bgRef} className="bg-image" src={process.env.PUBLIC_URL + "/background.png"} alt="background" />
           <img ref={scanlineRef} className="scanline-overlay" src="/vhs_scanline.png" alt="CRT Scanline Overlay" />
 
           {/* Content changes for each page */}
